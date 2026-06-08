@@ -28,10 +28,10 @@ Spring Boot API → Database → Debezium → Kafka → Elasticsearch
 
 | Component   | Status      |
 | ----------- | ----------- |
-| API         | Complete    |
-| Database    | Complete    |
+| API         | 80%         |
+| Database    | 90%         |
 | Debezium    | In progress |
-| Kafka       | In progress |
+| Kafka       | Not started |
 | Flink       | Not started |
 | Fraud Logic | Not started |
 
