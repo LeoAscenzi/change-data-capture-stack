@@ -1,0 +1,9 @@
+FROM postgres:18-bookworm
+
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=admin
+ENV POSTGRES_DB=db
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 5432

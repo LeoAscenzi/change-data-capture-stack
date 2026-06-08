@@ -1,0 +1,11 @@
+# Visual Studio Code
+.vscode/
+
+# Local environment files
+.env.local
+.env.*.local
+.env.prod
+
+# Local compose overrides
+docker-compose.local.yml
+docker-compose.prod.yml

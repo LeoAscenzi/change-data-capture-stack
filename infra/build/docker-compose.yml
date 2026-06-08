@@ -1,0 +1,20 @@
+services:
+  api:
+    container_name: springboot-api
+    networks:
+      - backend
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    volumes:
+        - pgdata:/var/lib/postgresql
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pgdata:
