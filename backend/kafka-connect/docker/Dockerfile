@@ -1,0 +1,10 @@
+FROM quay.io/debezium/connect
+
+ENV GROUP_ID=1
+ENV CONFIG_STORAGE_TOPIC=connect_configs
+ENV OFFSET_STORAGE_TOPIC=connect_offsets
+ENV STATUS_STORAGE_TOPIC=connect_statuses
+
+ENV BOOTSTRAP_SERVERS=kafka:9092
+
+EXPOSE 8083

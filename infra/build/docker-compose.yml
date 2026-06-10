@@ -8,8 +8,46 @@ services:
 
   db:
     container_name: db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     volumes:
         - pgdata:/var/lib/postgresql
+    networks:
+      - backend
+  kafka:
+    container_name: kafka
+    networks:
+      - backend
+
+  kafka-connect:
+    container_name: kafka-connect
+    networks:
+      - backend
+    depends_on:
+      db:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+
+  flink-jobmanager:
+    container_name: flink-jobmanager
+    command: jobmanager
+    environment:
+      - FLINK_PROPERTIES=jobmanager.rpc.address:flink-jobmanager
+    networks:
+      - backend
+
+  flink-taskmanager:
+    container_name: flink-taskmanager
+    image: flink:1.20-java17
+    command: taskmanager
+    environment:
+      - FLINK_PROPERTIES=jobmanager.rpc.address:flink-jobmanager
+    depends_on:
+      - flink-jobmanager
     networks:
       - backend
 networks:

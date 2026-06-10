@@ -1,0 +1,4 @@
+com/lascenzi/functions/FastTransactionFunction.class
+com/lascenzi/model/Transaction.class
+com/lascenzi/TransactionPatternJob.class
+com/lascenzi/DebeziumDeserializer.class

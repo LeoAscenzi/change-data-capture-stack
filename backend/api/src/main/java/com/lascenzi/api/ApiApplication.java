@@ -2,17 +2,19 @@ package com.lascenzi.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
+@EnableKafka
 public class ApiApplication {
 
 	@GetMapping("/")
 	public String home() 
 	{
-		return "Hello Docker World";
+		return "App is Up";
 	}
 
 	public static void main(String[] args) 

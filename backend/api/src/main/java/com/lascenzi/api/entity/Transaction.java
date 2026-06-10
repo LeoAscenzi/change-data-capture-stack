@@ -19,6 +19,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Matches Postgres SERIAL/BIGSERIAL
     private Long id;
 
+    @Column(name="user_id", nullable = false)
+    private String user_id;
+
     @Column(name="transaction_id")
     private UUID transaction_id;
 
@@ -33,41 +36,61 @@ public class Transaction {
 
     protected Transaction() {}
 
-    public Transaction(UUID transaction_id, BigDecimal amount, String status) {
+    public Transaction(String user_id, UUID transaction_id, BigDecimal amount, String status) 
+    {
+        this.user_id = user_id;
         this.transaction_id = transaction_id;
         this.amount = amount;
         this.status = status;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id) 
+    {
         this.id = id;
     }
 
-    public UUID getTransaction_id() {
+    public String getUser_id() 
+    {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) 
+    {
+        this.user_id = user_id;
+    }
+
+    public UUID getTransaction_id() 
+    {
         return transaction_id;
     }
 
-    public void setTransaction_id(UUID transaction_id) {
+    public void setTransaction_id(UUID transaction_id) 
+    {
         this.transaction_id = transaction_id;
     }
 
-    public BigDecimal getAmount() {
+    public BigDecimal getAmount() 
+    {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(BigDecimal amount) 
+    {
         this.amount = amount;
     }
 
-    public String getStatus() {
+    public String getStatus() 
+    {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status) 
+    {
         this.status = status;
     }
 
-    public OffsetDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() 
+    {
         return createdAt;
     }
 

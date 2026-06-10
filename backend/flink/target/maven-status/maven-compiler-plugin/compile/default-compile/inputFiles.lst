@@ -1,0 +1,4 @@
+/home/leoascenzi/Documents/ProgrammingProjects/change-data-capture-stack/backend/flink/src/main/java/com/lascenzi/DebeziumDeserializer.java
+/home/leoascenzi/Documents/ProgrammingProjects/change-data-capture-stack/backend/flink/src/main/java/com/lascenzi/TransactionPatternJob.java
+/home/leoascenzi/Documents/ProgrammingProjects/change-data-capture-stack/backend/flink/src/main/java/com/lascenzi/functions/FastTransactionFunction.java
+/home/leoascenzi/Documents/ProgrammingProjects/change-data-capture-stack/backend/flink/src/main/java/com/lascenzi/model/Transaction.java

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lascenzi.api.entity.Transaction;
+import com.lascenzi.api.service.BannedUserService;
 import com.lascenzi.api.service.PaymentService;
 
 @RestController
@@ -19,10 +20,13 @@ import com.lascenzi.api.service.PaymentService;
 public class PaymentController {
     
     private final PaymentService paymentService;
+    private final BannedUserService bannedUserService;
+
     @Autowired
-    public PaymentController(PaymentService paymentService)
+    public PaymentController(PaymentService paymentService, BannedUserService bannedUserService)
     {
         this.paymentService = paymentService;
+        this.bannedUserService = bannedUserService;
     }
 
     @GetMapping("/get-all-payments")
@@ -31,19 +35,19 @@ public class PaymentController {
         StringBuilder sb = new StringBuilder();
         List<Transaction> transactions = paymentService.getAllTransactions();
 
-    String format = "| %-36s | %-15s | %-15s | %-27s |%n";         
-    String line = "----------------------------------------------------------------------------------------------------------" + System.lineSeparator();           
+    String format = "| %-10s | %-36s | %-15s | %-15s | %-27s |%n";         
+    String line = "-----------------------------------------------------------------------------------------------------------------------" + System.lineSeparator();           
 
 
         sb.append("<pre style='font-family: monospace;'>");
         sb.append(line);
-        sb.append(String.format(format, "Transaction ID", "Amount", "Status", "Created At"));
+        sb.append(String.format(format, "User ID", "Transaction ID", "Amount", "Status", "Created At"));
         sb.append(line);
 
         // 3. Print Rows
         for(Transaction tr : transactions)
         {
-            sb.append(String.format(format,tr.getTransaction_id(), tr.getAmount(), tr.getStatus(), tr.getCreatedAt()));
+            sb.append(String.format(format,tr.getUser_id(), tr.getTransaction_id(), tr.getAmount(), tr.getStatus(), tr.getCreatedAt()));
         }
         
         sb.append("</pre>");
@@ -54,6 +58,12 @@ public class PaymentController {
     @PostMapping("/make-payment")
     public String createPayment(@RequestBody Transaction transaction)
     {
+        String userId = transaction.getUser_id();
+        if (bannedUserService.isBanned(userId))
+        {
+            return "Banned";
+        }
+
         UUID uuid = UUID.randomUUID();
         transaction.setTransaction_id(uuid);
         Transaction saved = paymentService.createPayment(transaction);
