@@ -23,17 +23,17 @@ Spring Boot API → Database → Debezium → Kafka → Elasticsearch
 ## Progress (Fraud Pipeline)
 
 ```
-[██████████░░░░░░░░░░░░░░░░░░░░░░] 35%
+[████████████████████████████████████░] 95%
 ```
 
 | Component   | Status      |
 | ----------- | ----------- |
-| API         | 80%         |
-| Database    | 90%         |
-| Debezium    | In progress |
-| Kafka       | Not started |
-| Flink       | Not started |
-| Fraud Logic | Not started |
+| API         | 95%         |
+| Database    | 95%         |
+| Debezium    | 100%        |
+| Kafka       | 99%         |
+| Flink       | 99%         |
+| Fraud Logic | 90%         |
 
 ---
 
@@ -45,8 +45,8 @@ Spring Boot · Database · Debezium · Kafka · Flink · Elasticsearch
 
 ## Next Steps
 
-* Configure Debezium connector
-* Stand up Kafka and topics
-* Validate CDC event flow
-* Implement Flink processing job
-* Define fraud detection patterns
+* Define better fraud detection patterns
+* Scale services
+* Test load handling
+* Make banning users or locking accounts persistent
+* Host on AWS
